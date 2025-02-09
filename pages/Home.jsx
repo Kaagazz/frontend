@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../components/Button';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -16,8 +17,12 @@ const Home = () => {
       </h1>
 
         <div className="flex flex-wrap gap-15">
+        <Link to="/sustainability">
           <Button text="Learn More" size="md" />
+        </Link>
+        <Link to="/shop">
           <Button text="Buy Now" size="md" />
+        </Link>
         </div>
         <p className="text-lg md:text-xl text-gray-600 max-w-md">
           Empowering Eco-Friendly Work Culture through Sustainable Paper Solutions.
@@ -78,7 +83,9 @@ const Home = () => {
     </div>
   </div>
 </section>
+    <Link to="/about">
     <Button text="Learn More" size="md" />
+    </Link>
   </div>
     </section>
     <section className='bg-black text-white w-full flex flex-col items-center justify-center'>
@@ -150,7 +157,9 @@ const Home = () => {
       <h1 className='text-5xl font-thin'>
           Check Out our Products
           </h1>
+          <Link to= "/shop">
           <Button text="Buy Now" size="md" />
+          </Link>
       </div>
     </section>
     </>
