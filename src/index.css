@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+body {
+    font-family: "Outfit", sans-serif;
+    font-weight: 400; /* Default weight change it as need */
+}
+
+.outfit-thin {
+    font-family: "Outfit", sans-serif;
+    font-weight: 200;
+}
+
+.outfit-light {
+    font-family: "Outfit", sans-serif;
+    font-weight: 300;
+}
+
+.outfit-regular {
+    font-family: "Outfit", sans-serif;
+    font-weight: 400;
+}
+
+.outfit-medium {
+    font-family: "Outfit", sans-serif;
+    font-weight: 500;
+}
+
+.outfit-bold {
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+}
+
+.outfit-extrabold {
+    font-family: "Outfit", sans-serif;
+    font-weight: 900;
+}
