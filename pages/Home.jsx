@@ -1,165 +1,341 @@
-import React from 'react';
-import Button from '../components/Button';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef } from "react";
+import Button from "../components/Button";
+import { Link } from "react-router-dom";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "framer-motion";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Home = () => {
+  // Hero Section Refs
+  const titleRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const imgRef = useRef(null);
+  const taglineRef = useRef(null);
+
+  // Mission & About Section Refs
+  const sectionTitleRef = useRef(null);
+  const missionStatementsRef = useRef([]);
+  missionStatementsRef.current = [];
+  const aboutTextRef = useRef(null);
+
+  // Timeline Section Refs
+  const timelineCardsRef = useRef([]);
+  timelineCardsRef.current = [];
+
+  // Function to add refs to arrays inside .map()
+  const addToRefs = (el, refArray) => {
+    if (el && !refArray.current.includes(el)) {
+      refArray.current.push(el);
+    }
+  };
+
+  useEffect(() => {
+    // Hero section animations
+    gsap.fromTo(
+      [titleRef.current, subtitleRef.current, imgRef.current, taglineRef.current],
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: 1.2, ease: "expo.out", stagger: 0.2 }
+    );
+
+    // Mission statements animation
+    gsap.fromTo(
+      missionStatementsRef.current,
+      { opacity: 0, y: 30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        stagger: 0.3,
+        scrollTrigger: {
+          trigger: sectionTitleRef.current,
+          start: "top 70%",
+        },
+      }
+    );
+
+    // About text animation
+    gsap.fromTo(
+      aboutTextRef.current,
+      { opacity: 0, y: 20 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        scrollTrigger: {
+          trigger: aboutTextRef.current,
+          start: "top 80%",
+        },
+      }
+    );
+
+    // Timeline cards animation
+    timelineCardsRef.current.forEach((card, index) => {
+      gsap.fromTo(
+        card,
+        { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%",
+          },
+        }
+      );
+    });
+  }, []);
+
   return (
     <>
-    <section className="relative w-full h-screen flex items-center px-6 md:px-20 overflow-hidden">
-      <div 
-        className="absolute inset-0 bg-no-repeat bg-cover bg-center md:bg-right lg:bg-[length:65%_auto]"
-        style={{ backgroundImage: "url('../assets/Africa (1).png')" }}
-      ></div>
-      <div className="relative z-10 w-full md:w-1/2 flex flex-col gap-6 bg-white/80 md:bg-transparent p-6 md:p-10 rounded-xl">
-      <h1 className="font-bold text-5xl md:text-7xl leading-[1]">
-        <span className="text-black">waste to</span><br /> 
-        <span className="text-[#41932A] font-bold">paper.</span>
-      </h1>
+      {/* Hero Section */}
+      <section className="relative w-full min-h-screen flex items-center justify-center bg-gradient-to-b from-[#F7F2E6] to-[#E6DAC2] px-6 text-center overflow-hidden">
+        <div className="max-w-6xl space-y-8">
+          <h1 ref={titleRef} className="text-7xl font-bold text-[#4A3F35] mb-4 opacity-0">
+            KAAGAZZ
+          </h1>
+          <h4 ref={subtitleRef} className="text-2xl font-light text-[#6B5D4D] opacity-0">
+            Peel to Paper
+          </h4>
+          
+          <div ref={imgRef} className="relative mt-12 w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
+            <img 
+              src="../assets/main.jpg"
+              alt="Kaagazz Paper Production"
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-        <div className="flex flex-wrap gap-15">
-        <Link to="/sustainability">
-          <Button text="Learn More" size="md" />
-        </Link>
-        <Link to="/shop">
-          <Button text="Buy Now" size="md" />
-        </Link>
+          <h2 ref={taglineRef} className="text-xl font-light text-[#6B5D4D] italic opacity-0">
+          Building a safe future for all,one sheet at a time.
+          </h2>
         </div>
-        <p className="text-lg md:text-xl text-gray-600 max-w-md">
-          Empowering Eco-Friendly Work Culture through Sustainable Paper Solutions.
-        </p>
-      </div>
-    </section>
-    <section className="w-full h-38 flex items-center justify-center bg-cover bg-center text-white text-2xl font-bold"
-        style={{ backgroundImage: "url('../assets/download (5).jpg')" }}
+      </section>
+      {/* Mission Section */}
+      <section className="w-full py-24 bg-[#F5F1EB]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div ref={sectionTitleRef} className="mb-20 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-[#4A3F35] mb-8">
+              What is Kaagazz
+            </h1>
+            
+            {[
+              "Kaagazz is a dream to have forests full of trees and roads free of filth.",
+              "Kaagazz is a promise to treat all with respect and care.",
+              "Kaagazz is an experience of finest Indian tree-free paper."
+            ].map((text, index) => (
+              <h2 
+                key={index}
+                ref={(el) => addToRefs(el, missionStatementsRef)}
+                className="text-xl md:text-2xl font-light text-[#6B5D4D] mb-6 opacity-0"
+              >
+                {text}
+              </h2>
+            ))}
+          </div>
+
+          <div ref={aboutTextRef} className="text-center opacity-0">
+            <p className="text-lg md:text-xl text-[#4A3F35] leading-relaxed max-w-4xl mx-auto">
+              Kaagazz is a social enterprise founded by DTU alumni. We create premium paper products 
+              while empowering marginalized communities through sustainable employment. Our innovative 
+              production technology transforms urban waste into exquisite paper, fostering environmental 
+              stewardship and social change.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="w-full py-24 bg-gradient-to-b from-[#3B3228] to-[#1F1B16]">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl font-bold text-center text-[#EAE0C8] mb-16">
+            Our Journey Through Time
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              { 
+                date: "12 May 2024", 
+                text: "Incubated at Delhi Technological University's prestigious innovation cell",
+                img: "../assets/dtu.jpg"
+              },
+              { 
+                date: "14 Nov 2024", 
+                text: "Shortlisted for MSME Hackathon by FITT at IIT Delhi",
+                img: "../assets/iit-delhi.jpg"
+              },
+              { 
+                date: "2 Jan 2025", 
+                text: "Completed herSTART 4.0 Bootcamp with GUSEC and UNICEF",
+                img: "../assets/gsu.jpg"
+              }
+            ].map((card, index) => (
+              <div 
+                key={index}
+                ref={(el) => addToRefs(el, timelineCardsRef)}
+                className="bg-[#5A4D42] rounded-xl p-8 shadow-xl transform transition-all hover:scale-105 duration-300 opacity-0"
+              >
+                <div className="border-l-2 border-[#BFAF99] pl-4 mb-6">
+                  <h3 className="text-xl font-semibold text-[#EAE0C8]">{card.date}</h3>
+                </div>
+                <p className="text-[#C9B8A3] mb-6 leading-relaxed">{card.text}</p>
+                <img 
+                  src={card.img} 
+                  alt={`Milestone ${index + 1}`} 
+                  className="w-full h-56 object-cover rounded-lg"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* What Do We Do Section */}
+      <section className="bg-[#eaeaea] py-24 px-6 relative overflow-hidden">
+  <div className="max-w-7xl mx-auto text-center">
+    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1A1A1A] mb-20 tracking-wide uppercase">
+      What Do We Do?
+    </h2>
+
+    <div className="space-y-16">
+      {[
+        {
+          title: "Ability for 'Dis'Ability",
+          text: "Connect your site to the most popular apps out there.",
+          img: "../assets/disability.jpg",
+        },
+        {
+          title: "Sanitation for All",
+          text: "We have overturned the waste problem of urban landscapes into a scalable solution. We care for humans and animals that have suffered from the filth that decays around ourselves.",
+          img: "../assets/sanitation.jpg",
+        },
+        {
+          title: "NO to Deforestation",
+          text: "We create tree-free carbon neutral and chemical-free paper using our patentable technology. This is key to our fight against global issues like climate change and greenhouse gas emissions.",
+          img: "../assets/deforestation.png",
+        },
+        {
+          title: "Inclusive Employment",
+          text: "We are an equal opportunity platform that welcomes all genders for dignified employment.",
+          img: "../assets/main.jpg",
+        }
+      ].map((item, index) => (
+        <motion.div
+          key={index}
+          className={`flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
         >
-          <h1 className='text-4xl text-center'>Your journey to <br />
-          Sustainable Paper</h1>
-    </section>
-    <section className="w-full min-h-screen flex flex-col items-center px-4 md:px-12 mt-20">
-      <div className="w-full flex flex-col items-center text-center gap-6">
-        <h1 className="text-4xl md:text-6xl font-bold drop-shadow-[4px_4px_5px_rgba(0,0,0,0.4)]">
-          What is Kaagazz
-        </h1>
-        <h2 className="text-lg md:text-2xl font-light max-w-2xl">
-          Kaagazz is a dream to have forests full of trees and roads free of filth.
-        </h2>
-        <h2 className="text-lg md:text-2xl font-light max-w-2xl">
-          Kaagazz is a promise to treat all with respect and care.
-        </h2>
-        <h2 className="text-lg md:text-2xl font-light max-w-2xl">
-          Kaagazz is an experience of finest Indian tree-free paper.
-        </h2>
-      </div>
-  <div className="w-full flex flex-col items-center text-center gap-6 mt-12 md:mt-20">
-    <p className="text-base md:text-xl font-light w-full max-w-3xl leading-relaxed px-4">
-      Kaagazz is a social enterprise founded by DTU alumni. We have created Premium Paper Products for Arts and Industries alike. Through its innovative production technology, Kaagazz works for social security of disabled and marginalized sections by providing them employment in the sustainability sector.
-    </p>
-    <section className="w-full p-6 md:p-12">
-  <div className="w-full text-center mb-6">
-    <h2 className="text-4xl font-bold">Kaagazz Till Now</h2>
-  </div>
-  <div className="w-full flex gap-6 overflow-x-auto md:overflow-visible md:flex-nowrap flex-wrap">
-    <div className="w-full md:w-1/3 min-w-[280px] bg-gray-100 rounded-xl p-6 shadow-md">
-      <h3 className="text-xl font-semibold">Card 1 Title</h3>
-      <p className="text-gray-600">Subtitle here</p>
-      <img src="your-image-url.jpg" alt="Card 1" className="w-full h-40 object-cover my-4 rounded-lg" />
-      <div className="h-10"></div> {/* Empty space */}
-    </div>
-
-    {/* Card 2 */}
-    <div className="w-full md:w-1/3 min-w-[280px] bg-gray-100 rounded-xl p-6 shadow-md">
-      <h3 className="text-xl font-semibold">Card 2 Title</h3>
-      <p className="text-gray-600">Subtitle here</p>
-      <img src="your-image-url.jpg" alt="Card 2" className="w-full h-40 object-cover my-4 rounded-lg" />
-      <div className="h-10"></div> {/* Empty space */}
-    </div>
-
-    {/* Card 3 */}
-    <div className="w-full md:w-1/3 min-w-[280px] bg-gray-100 rounded-xl p-6 shadow-md">
-      <h3 className="text-xl font-semibold">Card 3 Title</h3>
-      <p className="text-gray-600">Subtitle here</p>
-      <img src="your-image-url.jpg" alt="Card 3" className="w-full h-40 object-cover my-4 rounded-lg" />
-      <div className="h-10"></div> {/* Empty space */}
+          <div className="md:w-1/2 w-full p-10">
+            <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-[#1A1A1A] mb-4">{item.title}</h3>
+            <p className="text-md sm:text-lg md:text-xl lg:text-2xl text-[#4A4A4A] font-thin leading-[1.4]">{item.text}</p>
+          </div>
+          <div className="md:w-1/2 w-full">
+            <img 
+              src={item.img} 
+              alt={item.title} 
+              className="w-full h-72 md:h-96 object-cover rounded-2xl shadow-xl" 
+            />
+          </div>
+        </motion.div>
+      ))}
     </div>
   </div>
 </section>
-    <Link to="/about">
-    <Button text="Learn More" size="md" />
-    </Link>
-  </div>
+    {/*Products gallery*/}
+    <section className="bg-[#FFFFFF] py-24 px-6 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto text-center">
+        <div className="space-y-16">
+          {[  
+            {
+              title: "Premium Paper Stationaire",
+              text: "Perfect for office supplies and environment vigilantees",
+              img: "../assets/diary.jpeg",
+              btn_text: "Shop Now"
+            },
+            {
+              title: "Publish Your Next Book ",
+              text: "Paper with a cause. Excellent for  Premium Hard Cover Books.",
+              img: "../assets/book.jpeg",
+              btn_text: "Explore Now"
+            },
+            {
+              title: "Are You An Art Connoisseur ?",
+              text: "Experience our satin finish guilt-free paper for your aesthetics.",
+              img: "../assets/A4.jpg",
+              btn_text: "Shop Now"
+            }
+          ].map((item, index) => (
+            <motion.div
+              key={index}
+              className={`flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
+              <div className="md:w-1/2 w-full p-10">
+                <h3 className="text-2xl font-semibold text-[#1A1A1A] mb-4">{item.title}</h3>
+                <p className="text-3xl text-[#4A4A4A] font-thin mb-10 leading-tight">{item.text}</p>
+                <Link to="/shop">
+                  <Button text={item.btn_text} />
+                </Link>
+              </div>
+              <div className="md:w-1/2 w-full">
+                <img 
+                  src={item.img} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover rounded-2xl shadow-xl" 
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
-    <section className='bg-black text-white w-full flex flex-col items-center justify-center'>
-      <div className='w-full flex flex-col items-center justify-center gap-6 p-6 md:p-12'>
-        <h1>IMPACT OF KAAGAZZ</h1>
-        <img src="../assets/download (3) 1.png" alt="kaagazz" />
-        <h1>Forgotten Childhood</h1>
-        <h3>The Saddest Part Of India</h3>
-      </div>
-      <div className='w-full flex items-center justify-center gap-6 p-6 md:p-12'>
-        <h1>
-        "Kaagazz transforms the lives of ragpicker and homeless children by providing them with meaningful employment, turning discarded paper into a brighter future—one page at a time."
-        </h1>
-        <img src="../assets/download (5) 2.png" alt="kaagazz" />
-      </div>
-      <h2 className="text-3xl md:text-5xl font-semibold uppercase">
-      Sanitation for all
-    </h2>
-      <div className="w-full max-w-6xl flex flex-col md:flex-row items-center gap-8 mx-auto">
-  <div className="w-full md:w-1/2 hidden md:block">
-    <img 
-      src="../assets/sanitation.png" 
-      alt="Sanitation" 
-      className="w-full h-auto object-cover"
-    />
-  </div>
-  <div className="w-full md:w-1/2 text-center md:text-left flex flex-col justify-center gap-6">
-    <img 
-      src="../assets/sanitaion2.png" 
-      alt="WasteManagement"
-      className="w-full h-auto object-cover"
-    />
-    <p className="text-lg md:text-xl leading-relaxed">
-      We have overturned the waste problem of urban landscapes into a scalable solution. We care for humans and animals that have suffered from the filth that decays around ourselves.
-    </p>
-  </div>
-  </div>
-  <div className="w-full flex flex-col text-white items-center justify-center gap-6 p-6 md:p-12">
-    <h1>NO To Deforestation</h1>
-    <img src="../assets/trees.png" alt="none" />
-    <p className="text-lg md:text-xl leading-relaxed text-center font-thin">
-    We create tree-free carbon neutral and chemical free paper using our patentable technology. This is key to our fight against global issues like climate change and greenhouse gas emissions. We create tree-free carbon neutral and chemical free paper using our patentable technology. This is key to our fight against global issues like climate change and greenhouse gas emissions. 
-    </p>
-  </div>
-    </section>
-    <section className='w-full bg-white flex flex-col items-center justify-center gap-6 p-6 md:p-12'>
-      <h1 className='text-4xl font-light'>Why Choose KAAGAZZ</h1>
-      <div className='flex w-full'>
-        <div className='w-1/2 flex flex-col items-center justify-center gap-6'>
-          <img src="../assets/landingPage_2.jpeg" alt="none" />
+    <section className="bg-[#EAEAEA] py-16 px-6 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto text-center">
+        <h2 className="text-6xl font-extrabold text-[#1A1A1A] mb-12 tracking-wide uppercase">
+          Our Founders
+        </h2>
+
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {[  
+            {
+              name: "Hemant Singh",
+              position: "Co-Founder & CFO",
+              bio: "A DTU alumnus and visionary leader, our CFO pioneers sustainable innovation with a passion for technology and impact.",
+              img: "../assets/hemant.jpg",
+            },
+            {
+              name: "Srishti Singh",
+              position: "Co-Founder & CTO",
+              bio: "A DTU alumnus and passionate entrepreneur, our CEO leads with a vision to revolutionize sustainability through innovation",
+              img: "../assets/srishti.jpg",
+            }
+          ].map((founder, index) => (
+            <motion.div
+              key={index}
+              className="flex flex-col md:flex-row items-center text-left bg-white shadow-2xl p-6 rounded-2xl overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1 }}
+              viewport={{ once: true }}
+            >
+              <img 
+                src={founder.img} 
+                alt={founder.name} 
+                className="w-40 h-40 md:w-48 md:h-48 object-cover rounded-full shadow-lg mr-6" 
+              />
+              <div>
+                <h3 className="text-3xl font-bold text-[#1A1A1A]">{founder.name}</h3>
+                <p className="text-lg text-[#4A4A4A] font-medium">{founder.position}</p>
+                <p className="text-md text-[#6A6A6A] mt-2">{founder.bio}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
-        <div className='w-1/2 flex flex-col items-center justify-center gap-6 p-30'>
-          <h1 className='text-5xl font-thin'>
-          Handcrafted with care, transforming waste into premium sustainable paper.
-          </h1>
-        </div>
-      </div>
-      <div className='flex w-full'>
-        <div className='w-1/2 flex flex-col items-center justify-center gap-6 p-30'>
-          <h1 className='text-5xl font-thin'>
-          Crafted with precision for superior quality, using sustainable, recycled materials.
-          </h1>
-        </div>
-        <div className='w-1/2 flex flex-col items-center justify-center gap-6'>
-          <img src="../assets/landingPage_3.jpeg" alt="none" />
-        </div>
-      </div>
-      <div className='flex w-full flex-col items-center justify-center gap-6'>
-      <h1 className='text-5xl font-thin'>
-          Check Out our Products
-          </h1>
-          <Link to= "/shop">
-          <Button text="Buy Now" size="md" />
-          </Link>
       </div>
     </section>
     </>
