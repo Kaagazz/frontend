@@ -9,6 +9,7 @@ import Footer from '../components/Footer'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Sustainability from '../pages/Sustainability';
 import About from '../pages/About'
+import ProductPage from '../pages/ProductPage'
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
       <Route path='/sign-up' element={<Signup/>}/>
       <Route path='/sign-in' element={<Signin/>}/>
       <Route path='/about' element={<About/>}/>
+      <Route path='/product' element={<ProductPage/>}/>
     </Routes>
     <Footer/>
 
