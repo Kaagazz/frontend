@@ -17,7 +17,7 @@ const Navbar = ({ cart }) => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setIsAuthenticated(false);
-    navigate("/sign-in"); // Redirect to login after logout
+    navigate("/"); // Redirect to login after logout
   };
 
   return (

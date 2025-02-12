@@ -23,7 +23,7 @@ const Signin = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:4002/user/sendotp", { email });
+      const response = await axios.post("https://backend-zgo4.onrender.com/user/sendotp", { email });
 
       if (response.status === 200) {
         setStep(2); // Move to OTP verification step

@@ -31,7 +31,7 @@ const Signup = () => {
 
     try {
       // Register user
-      const response = await axios.post("http://localhost:4002/user/register", {
+      const response = await axios.post("https://backend-zgo4.onrender.com/user/register", {
         fname: userData.fname,
         email: userData.email,
         password: userData.password,
@@ -41,7 +41,7 @@ const Signup = () => {
         setSuccess("Registration successful! Sending OTP...");
 
         // Send OTP request
-        await axios.post("http://localhost:4002/user/sendotp", {
+        await axios.post("https://backend-zgo4.onrender.com/user/sendotp", {
           email: userData.email,
         });
 

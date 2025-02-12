@@ -38,7 +38,7 @@ const OtpVerification = () => {
     setMessage("");
 
     try {
-      const response = await axios.post("http://localhost:4002/user/login", { email, otp });
+      const response = await axios.post("https://backend-zgo4.onrender.com/user/login", { email, otp });
 
       if (response.status === 200) {
         localStorage.setItem("userToken", response.data.userToken); // Store token
