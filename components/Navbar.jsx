@@ -1,10 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ShoppingCart } from "lucide-react"; 
 
 const Navbar = ({ cart }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const cartItemCount = cart ? cart.length : 0;
+
+  useEffect(() => {
+    // Check authentication from localStorage or a token
+    const token = localStorage.getItem("authToken");
+    setIsAuthenticated(!!token); // Convert token existence to boolean
+  }, []);
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-[#F6F6F6] text-[#1A1A1A] py-4 px-6 shadow-md z-50">
@@ -16,20 +23,29 @@ const Navbar = ({ cart }) => {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-10 text-lg font-medium">
-          <Link to="/" className="hover:text-gray-600 transition">Home</Link>
-          <Link to="/sustainability" className="hover:text-gray-600 transition">Sustainability</Link>
-          <Link to="/shop" className="hover:text-gray-600 transition">Store</Link>
-          <Link to="/cart" className="relative flex items-center gap-2">
-            <ShoppingCart size={28} className="text-gray-800 hover:text-gray-600 transition" />
-            <span className="text-gray-800 font-medium">
-              ({cartItemCount} {cartItemCount === 1 ? "item" : "items"})
-            </span>
-            {cartItemCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
-                {cartItemCount}
-              </span>
-            )}
-          </Link>
+          {isAuthenticated ? (
+            <>
+              <Link to="/" className="hover:text-gray-600 transition">Home</Link>
+              <Link to="/sustainability" className="hover:text-gray-600 transition">Sustainability</Link>
+              <Link to="/shop" className="hover:text-gray-600 transition">Store</Link>
+              <Link to="/cart" className="relative flex items-center gap-2">
+                <ShoppingCart size={28} className="text-gray-800 hover:text-gray-600 transition" />
+                <span className="text-gray-800 font-medium">
+                  ({cartItemCount} {cartItemCount === 1 ? "item" : "items"})
+                </span>
+                {cartItemCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                    {cartItemCount}
+                  </span>
+                )}
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/sign-in" className="hover:text-gray-600 transition">Login</Link>
+              <Link to="/sign-up" className="hover:text-gray-600 transition">Sign Up</Link>
+            </>
+          )}
         </div>
 
         {/* Mobile Menu Button */}
@@ -45,13 +61,22 @@ const Navbar = ({ cart }) => {
         }`}
         style={{ zIndex: 40 }}
       >
-        <Link to="/" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Home</Link>
-        <Link to="/sustainability" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Sustainability</Link>
-        <Link to="/shop" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Store</Link>
-        <Link to="/cart" className="flex items-center gap-2 hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>
-          <ShoppingCart size={22} />
-          <span>Cart ({cartItemCount} {cartItemCount === 1 ? "item" : "items"})</span>
-        </Link>
+        {isAuthenticated ? (
+          <>
+            <Link to="/" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Home</Link>
+            <Link to="/sustainability" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Sustainability</Link>
+            <Link to="/shop" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Store</Link>
+            <Link to="/cart" className="flex items-center gap-2 hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>
+              <ShoppingCart size={22} />
+              <span>Cart ({cartItemCount} {cartItemCount === 1 ? "item" : "items"})</span>
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link to="/sign-in" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Login</Link>
+            <Link to="/sign-up" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Sign Up</Link>
+          </>
+        )}
       </div>
     </nav>
   );

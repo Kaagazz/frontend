@@ -8,6 +8,9 @@ import Signin from "../pages/Signin";
 import Cart from "../pages/Cart";
 import Footer from "../components/Footer";
 import Sustainability from "../pages/Sustainability";
+import OtpStatus from "../pages/OtpStatus";
+import OtpVerification from "../pages/OtpVerification";
+
 
 function App() {
   const location = useLocation();
@@ -52,6 +55,9 @@ function App() {
         <Route path="/cart" element={<Cart cart={cart} removeFromCart={removeFromCart} addToCart={addToCart} />} />
         <Route path="/sign-up" element={<Signup />} />
         <Route path="/sign-in" element={<Signin />} />
+        <Route path="/otp-verification" element={<OtpVerification />} />
+        <Route path="/Otp-Status" element={<OtpStatus />} />
+        
       </Routes>
 
       {!hideNavbar && <Footer />}
