@@ -48,7 +48,7 @@ const Shop = ({ addToCart }) => {
 
             {/* Change button based on service/product */}
             {product.isService ? (
-              <Link to="/contact" className="mt-4 px-6 py-2 bg-gray-300 rounded-full text-gray-800 hover:bg-gray-400 transition text-center">
+              <Link to="/book-publish" className="mt-4 px-6 py-2 bg-gray-300 rounded-full text-gray-800 hover:bg-gray-400 transition text-center">
                 Contact Us
               </Link>
             ) : (

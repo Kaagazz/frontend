@@ -5,6 +5,7 @@ import Shop from "../pages/Shop";
 import Home from "../pages/Home";
 import Signup from "../pages/Signup";
 import Signin from "../pages/Signin";
+import Book from "../pages/Book";
 import Cart from "../pages/Cart";
 import Footer from "../components/Footer";
 import Sustainability from "../pages/Sustainability";
@@ -57,7 +58,7 @@ function App() {
         <Route path="/sign-in" element={<Signin />} />
         <Route path="/otp-verification" element={<OtpVerification />} />
         <Route path="/Otp-Status" element={<OtpStatus />} />
-        
+        <Route path="/book-publish" element={<Book />} />
       </Routes>
 
       {!hideNavbar && <Footer />}
