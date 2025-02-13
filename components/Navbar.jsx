@@ -26,7 +26,7 @@ const Navbar = ({ cart }) => {
         
         {/* Logo */}
         <Link to="/">
-          <img src="../assets/logo.png" alt="Kaagazz Logo" className="h-12 cursor-pointer" />
+          <img src="/images/logo.png" alt="Kaagazz Logo" className="h-12 cursor-pointer" />
         </Link>
 
         {/* Desktop Menu */}

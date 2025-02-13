@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Logo from "../assets/logo.png";
-import Artisinal from "../assets/Artisinal.jpeg";
-import Book from "../assets/book.jpeg";
-import premium_Diary from "../assets/diary.jpeg";
-import A4 from "../assets/A4.jpg";
+import Logo from "/images/logo.png";
+import Artisinal from "/images/Artisinal.jpeg";
+import Book from "/images/book.jpeg";
+import premium_Diary from "/images/diary.jpeg";
+import A4 from "/images/A4.jpg";
 
 const Shop = ({ addToCart }) => {
   const [popup, setPopup] = useState(null);

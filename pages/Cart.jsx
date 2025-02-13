@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import EmptyCartImage from "../assets/diary.jpeg"; 
+import EmptyCartImage from "/images/diary.jpeg"; 
 import CustomButton from "../components/Button"; 
 
 const Cart = ({ cart, removeFromCart, addToCart }) => {  // Accept addToCart as a prop

@@ -102,7 +102,7 @@ const Home = () => {
           
           <div ref={imgRef} className="relative mt-12 w-full aspect-video rounded-2xl overflow-hidden shadow-2xl">
             <img 
-              src="../assets/main.jpg"
+              src="/images/main.jpg"
               alt="Kaagazz Paper Production"
               className="w-full h-full object-cover"
             />
@@ -157,17 +157,17 @@ const Home = () => {
               { 
                 date: "12 May 2024", 
                 text: "Incubated at Delhi Technological University's prestigious innovation cell",
-                img: "../assets/dtu.jpg"
+                img: "/images/dtu.jpg"
               },
               { 
                 date: "14 Nov 2024", 
                 text: "Shortlisted for MSME Hackathon by FITT at IIT Delhi",
-                img: "../assets/iit-delhi.jpg"
+                img: "/images/iit-delhi.jpg"
               },
               { 
                 date: "2 Jan 2025", 
                 text: "Completed herSTART 4.0 Bootcamp with GUSEC and UNICEF",
-                img: "../assets/gsu.jpg"
+                img: "/images/gsu.jpg"
               }
             ].map((card, index) => (
               <div 
@@ -201,22 +201,22 @@ const Home = () => {
         {
           title: "Ability for 'Dis'Ability",
           text: "Connect your site to the most popular apps out there.",
-          img: "../assets/disability.jpg",
+          img: "/images/disability.jpg",
         },
         {
           title: "Sanitation for All",
           text: "We have overturned the waste problem of urban landscapes into a scalable solution. We care for humans and animals that have suffered from the filth that decays around ourselves.",
-          img: "../assets/sanitation.jpg",
+          img: "/images/sanitation.jpg",
         },
         {
           title: "NO to Deforestation",
           text: "We create tree-free carbon neutral and chemical-free paper using our patentable technology. This is key to our fight against global issues like climate change and greenhouse gas emissions.",
-          img: "../assets/deforestation.png",
+          img: "/images/deforestation.png",
         },
         {
           title: "Inclusive Employment",
           text: "We are an equal opportunity platform that welcomes all genders for dignified employment.",
-          img: "../assets/main.jpg",
+          img: "/images/main.jpg",
         }
       ].map((item, index) => (
         <motion.div
@@ -251,19 +251,19 @@ const Home = () => {
             {
               title: "Premium Paper Stationaire",
               text: "Perfect for office supplies and environment vigilantees",
-              img: "../assets/diary.jpeg",
+              img: "/images/diary.jpeg",
               btn_text: "Shop Now"
             },
             {
               title: "Publish Your Next Book ",
               text: "Paper with a cause. Excellent for  Premium Hard Cover Books.",
-              img: "../assets/book.jpeg",
+              img: "/images/book.jpeg",
               btn_text: "Explore Now"
             },
             {
               title: "Are You An Art Connoisseur ?",
               text: "Experience our satin finish guilt-free paper for your aesthetics.",
-              img: "../assets/A4.jpg",
+              img: "/images/A4.jpg",
               btn_text: "Shop Now"
             }
           ].map((item, index) => (
@@ -306,13 +306,13 @@ const Home = () => {
               name: "Hemant Singh",
               position: "Co-Founder & CFO",
               bio: "A DTU alumnus and visionary leader, our CFO pioneers sustainable innovation with a passion for technology and impact.",
-              img: "../assets/hemant.jpg",
+              img: "/images/hemant.jpg",
             },
             {
               name: "Srishti Singh",
               position: "Co-Founder & CTO",
               bio: "A DTU alumnus and passionate entrepreneur, our CEO leads with a vision to revolutionize sustainability through innovation",
-              img: "../assets/srishti.jpg",
+              img: "/images/srishti.jpg",
             }
           ].map((founder, index) => (
             <motion.div
