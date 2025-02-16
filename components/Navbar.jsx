@@ -17,7 +17,7 @@ const Navbar = ({ cart }) => {
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     setIsAuthenticated(false);
-    navigate("/"); // Redirect to login after logout
+    navigate("/"); // Redirect to home after logout
   };
 
   return (
@@ -26,32 +26,27 @@ const Navbar = ({ cart }) => {
         
         {/* Logo */}
         <Link to="/">
-          <img src="/images/logo.png" alt="Kaagazz Logo" className="h-12 cursor-pointer" />
+          <img src="../assets/logo.png" alt="Kaagazz Logo" className="h-12 cursor-pointer" />
         </Link>
 
         {/* Desktop Menu */}
         <div className="hidden md:flex gap-10 text-lg font-medium">
-          {isAuthenticated ? (
-            <>
-              <Link to="/" className="hover:text-gray-600 transition">Home</Link>
-              <Link to="/sustainability" className="hover:text-gray-600 transition">Sustainability</Link>
-              <Link to="/shop" className="hover:text-gray-600 transition">Store</Link>
-              <Link to="/cart" className="relative flex items-center gap-2">
-                <ShoppingCart size={28} className="text-gray-800 hover:text-gray-600 transition" />
-                {cartItemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
-                    {cartItemCount}
-                  </span>
-                )}
-              </Link>
-              <button onClick={handleLogout} className="hover:text-red-600 transition">Logout</button>
-            </>
-          ) : (
-            <>
-              <Link to="/sign-in" className="hover:text-gray-600 transition">Login</Link>
-              <Link to="/sign-up" className="hover:text-gray-600 transition">Sign Up</Link>
-            </>
+          <Link to="/" className="hover:text-gray-600 transition">Home</Link>
+          <Link to="/sustainability" className="hover:text-gray-600 transition">Sustainability</Link>
+          <Link to="/shop" className="hover:text-gray-600 transition">Store</Link>
+          <Link to="/cart" className="relative flex items-center gap-2">
+            <ShoppingCart size={28} className="text-gray-800 hover:text-gray-600 transition" />
+            {cartItemCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
+                {cartItemCount}
+              </span>
+            )}
+          </Link>
+          {isAuthenticated && (
+            <button onClick={handleLogout} className="hover:text-red-600 transition">Logout</button>
           )}
+          {/* <Link to="/sign-in" className="hover:text-gray-600 transition">Login</Link>
+          <Link to="/sign-up" className="hover:text-gray-600 transition">Sign Up</Link> */}
         </div>
 
         {/* Mobile Menu Button */}
@@ -63,22 +58,17 @@ const Navbar = ({ cart }) => {
       {/* Mobile Dropdown Menu */}
       {isOpen && (
         <div className="md:hidden flex flex-col bg-white text-[#1A1A1A] py-4 px-6 space-y-4 absolute w-full left-0 top-full shadow-lg">
-          {isAuthenticated ? (
-            <>
-              <Link to="/" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Home</Link>
-              <Link to="/sustainability" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Sustainability</Link>
-              <Link to="/shop" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Store</Link>
-              <Link to="/cart" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>
-                Cart ({cartItemCount})
-              </Link>
-              <button onClick={handleLogout} className="hover:text-red-600 transition">Logout</button>
-            </>
-          ) : (
-            <>
-              <Link to="/sign-in" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Login</Link>
-              <Link to="/sign-up" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Sign Up</Link>
-            </>
+          <Link to="/" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Home</Link>
+          <Link to="/sustainability" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Sustainability</Link>
+          <Link to="/shop" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Store</Link>
+          <Link to="/cart" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>
+            Cart ({cartItemCount})
+          </Link>
+          {isAuthenticated && (
+            <button onClick={handleLogout} className="hover:text-red-600 transition">Logout</button>
           )}
+          {/* <Link to="/sign-in" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Login</Link>
+          <Link to="/sign-up" className="hover:text-gray-600 transition" onClick={() => setIsOpen(false)}>Sign Up</Link> */}
         </div>
       )}
     </nav>
