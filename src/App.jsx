@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import Sustainability from "../pages/Sustainability";
 import OtpStatus from "../pages/OtpStatus";
 import OtpVerification from "../pages/OtpVerification";
+import ScrollToTop from "../components/ScrollToTop";
 
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
   return (
     <>
       {!hideNavbar && <Navbar cart={cart} />} {/* ✅ Pass cart to update count */}
-
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop addToCart={addToCart} cart={cart} />} />

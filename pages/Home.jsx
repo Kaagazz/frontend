@@ -118,7 +118,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div ref={sectionTitleRef} className="mb-20 text-center">
             <h1 className="text-4xl md:text-6xl font-bold text-[#4A3F35] mb-8">
-              What is Kaagazz
+              What is Kaagazz ?
             </h1>
             
             {[
@@ -146,26 +146,27 @@ const Home = () => {
           </div>
         </div>
       </section>
+      {/* OUR JOURNEY SECTION  */}
       <section className="w-full py-24 bg-gradient-to-b from-[#3B3228] to-[#1F1B16]">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-4xl font-bold text-center text-[#EAE0C8] mb-16">
-            Our Journey Through Time
+            Our journey through time
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { 
-                date: "12 May 2024", 
+                date: "May 2024", 
                 text: "Incubated at Delhi Technological University's prestigious innovation cell",
                 img: "/images/dtu.jpg"
               },
               { 
-                date: "14 Nov 2024", 
+                date: "Nov 2024", 
                 text: "Shortlisted for MSME Hackathon by FITT at IIT Delhi",
                 img: "/images/iit-delhi.jpg"
               },
               { 
-                date: "2 Jan 2025", 
+                date: "Jan 2025", 
                 text: "Completed herSTART 4.0 Bootcamp with GUSEC and UNICEF",
                 img: "/images/gsu.jpg"
               }
@@ -192,15 +193,15 @@ const Home = () => {
       {/* What Do We Do Section */}
       <section className="bg-[#eaeaea] py-24 px-6 relative overflow-hidden">
   <div className="max-w-7xl mx-auto text-center">
-    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1A1A1A] mb-20 tracking-wide uppercase">
-      What Do We Do?
+    <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#1A1A1A] mb-20 tracking-wide">
+      What do we do?
     </h2>
 
     <div className="space-y-16">
       {[
         {
           title: "Ability for 'Dis'Ability",
-          text: "Connect your site to the most popular apps out there.",
+          text: "Providing the employement to the the specially abled and financially backwards people helps them to live with dignity",
           img: "/images/disability.jpg",
         },
         {
