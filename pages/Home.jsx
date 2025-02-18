@@ -122,14 +122,14 @@ const Home = () => {
             </h1>
             
             {[
-              "Kaagazz is a dream to have forests full of trees and roads free of filth.",
-              "Kaagazz is a promise to treat all with respect and care.",
-              "Kaagazz is an experience of finest Indian tree-free paper."
+              "Kaagazz is a dream to have forests full of trees and roads free of filth",
+              "Kaagazz is a promise to treat all with respect and care",
+              "Kaagazz is an experience of finest Indian tree-free paper"
             ].map((text, index) => (
               <h2 
                 key={index}
                 ref={(el) => addToRefs(el, missionStatementsRef)}
-                className="text-xl md:text-2xl font-light text-[#6B5D4D] mb-6 opacity-0"
+                className="text-xl md:text-2xl font-light italic text-[#6B5D4D] mb-6 opacity-0"
               >
                 {text}
               </h2>
@@ -304,13 +304,13 @@ const Home = () => {
           {[  
             {
               name: "Hemant Singh",
-              position: "Co-Founder & CFO",
-              bio: "A DTU alumnus and visionary leader, our CFO pioneers sustainable innovation with a passion for technology and impact.",
+              position: "Co-Founder",
+              bio: "A DTU alumnus and visionary leader, He pioneers sustainable innovation with a passion for technology and impact.",
               img: "/images/hemant.jpg",
             },
             {
               name: "Srishti Singh",
-              position: "Co-Founder & CTO",
+              position: "Co-Founder & CEO",
               bio: "A DTU alumnus and passionate entrepreneur, our CEO leads with a vision to revolutionize sustainability through innovation",
               img: "/images/srishti.jpg",
             }
